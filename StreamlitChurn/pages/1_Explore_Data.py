@@ -18,7 +18,7 @@ if st.checkbox('Show raw data'):
     st.subheader('Raw data')
 
     # User Control for number of rows to display
-    rows_option = st.slider('Select number of rows to display', min_value=5, max_value=100, value=25, step=5)
+    rows_option = st.slider('Select number of rows to display', min_value=5, max_value=100, value=15, step=5)
     st.write(f"Displaying {rows_option} rows of data")
 
     # Pagination
