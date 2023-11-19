@@ -11,7 +11,6 @@ def load_data():
 
 st.set_page_config(page_title="Customer Churn Data Visualization", page_icon="📈")
 
-
 st.markdown("# Explore Dataset")
 st.sidebar.header("Navigation")
 st.sidebar.markdown('''
@@ -43,7 +42,8 @@ if st.checkbox('Show raw data'):
     end_idx = start_idx + page_size
 
     # Display the shape of the dataset
-    st.write('Shape of dataset:', data.shape)
+    __shape__ = data.shape
+    st.write('Dataset contains', __shape__[0],' rows and ', __shape__[1], 'columns.')
 
     # Display the data for the current page
     st.table(data.iloc[start_idx:end_idx])
