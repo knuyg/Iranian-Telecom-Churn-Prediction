@@ -9,4 +9,4 @@ st.sidebar.header("Select Model")
 # Fetch data from session state
 data = st.session_state.data
 
-classifier_name = st.sidebar.selectbox("Select Classifier", ("KNN", "SVM", "Random Forest"))
+classifier_name = st.sidebar.selectbox("Select Classifier", ("KNN", "SVM", "Decision Tree"))
