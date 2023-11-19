@@ -11,11 +11,20 @@ def load_data():
 
 st.set_page_config(page_title="Customer Churn Data Visualization", page_icon="📈")
 
-st.markdown("# Explore Dataset")
-st.sidebar.header("Explore Dataset")
 
-# Load the data
-data = load_data()
+st.markdown("# Explore Dataset")
+st.sidebar.header("Navigation")
+st.sidebar.markdown('''
+- [Raw data](#raw-data)
+- [Correlation Heatmap](#correlation-heatmap)
+''', unsafe_allow_html=True)
+
+# Load the data and store it in a session state so it can be accessed across different pages
+if 'data' not in st.session_state:
+    st.session_state.data = load_data()
+
+data = st.session_state.data
+
 
 ## --- Raw Data --- ##
 
@@ -23,8 +32,7 @@ if st.checkbox('Show raw data'):
     st.subheader('Raw data')
 
     # User Control for number of rows to display
-    rows_option = st.slider('Select number of rows to display', min_value=5, max_value=100, value=15, step=5)
-    st.write(f"Displaying {rows_option} rows of data")
+    rows_option = st.slider('Select number of rows to display', min_value=5, max_value=50, value=15, step=5)
 
     # Pagination
     page_size = rows_option
@@ -34,12 +42,15 @@ if st.checkbox('Show raw data'):
     start_idx = (page_number - 1) * page_size
     end_idx = start_idx + page_size
 
+    # Display the shape of the dataset
+    st.write('Shape of dataset:', data.shape)
+
     # Display the data for the current page
     st.table(data.iloc[start_idx:end_idx])
 
 ## --- Heatmap --- ##
 
-st.write("Correlation Heatmap")
+st.subheader('Correlation Heatmap')
 corr_matrix = data.corr()
 fig = ff.create_annotated_heatmap(
     z=corr_matrix.values[::-1],  # Reverse the order of rows for the heatmap
