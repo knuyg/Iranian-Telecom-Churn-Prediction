@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+import plotly.figure_factory as ff
 
 @st.cache_data
 def load_data():
@@ -13,6 +16,8 @@ st.sidebar.header("Explore Dataset")
 
 # Load the data
 data = load_data()
+
+## --- Raw Data --- ##
 
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
@@ -31,3 +36,16 @@ if st.checkbox('Show raw data'):
 
     # Display the data for the current page
     st.table(data.iloc[start_idx:end_idx])
+
+## --- Heatmap --- ##
+
+st.write("Correlation Heatmap")
+corr_matrix = data.corr()
+fig = ff.create_annotated_heatmap(
+    z=corr_matrix.values[::-1],  # Reverse the order of rows for the heatmap
+    x=list(corr_matrix.columns), 
+    y=list(corr_matrix.index)[::-1],  # Reverse the Y-axis labels
+    annotation_text=corr_matrix.round(3).values[::-1].astype(str),  # Reverse the annotations
+    colorscale='YlGnBu'
+)
+st.plotly_chart(fig, use_container_width=True)
