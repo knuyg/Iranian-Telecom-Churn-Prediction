@@ -1,4 +1,3 @@
-## Function to rename properly the columns
 def rename_features(feature_name: str) -> str:
     """Properly renames the features of a given dataset
 
