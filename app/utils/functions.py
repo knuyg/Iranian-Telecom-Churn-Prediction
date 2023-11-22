@@ -1,3 +1,5 @@
+import streamlit as st
+
 def add_parameter_ui(clf_name):
     """Adds hyperparameters tuning UI, based on the selected classifier
 
@@ -11,7 +13,7 @@ def add_parameter_ui(clf_name):
     params
         a dictionnary of the selected hyperparameters values
     """
-    
+
     params = dict()
     if clf_name == "KNN":
         K = st.sidebar.slider("K", 1, 15)
