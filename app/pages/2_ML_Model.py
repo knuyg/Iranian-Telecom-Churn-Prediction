@@ -14,4 +14,5 @@ classifier_name = st.sidebar.selectbox("Select model", ("KNN", "SVM", "Decision 
 
 st.sidebar.subheader("Hyperparameters tuning")
 
-f.add_parameter_ui(classifier_name)
+params = f.add_parameter_ui(classifier_name)
+f.get_classifier(classifier_name, params)
