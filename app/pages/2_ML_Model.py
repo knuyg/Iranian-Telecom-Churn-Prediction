@@ -12,7 +12,17 @@ data = st.session_state.data
 
 classifier_name = st.sidebar.selectbox("Select model", ("KNN", "SVM", "Decision Tree"), label_visibility="collapsed")
 
+# Select classifier hyperparameters
 st.sidebar.subheader("Hyperparameters tuning")
 
 params = f.add_parameter_ui(classifier_name)
-f.get_classifier(classifier_name, params)
+clf = f.get_classifier(classifier_name, params)
+
+# Train model
+
+# later: put it into the preprocessing file and replace it
+X = data.drop(columns=['Churn'])
+y = data['Churn']
+y_pred, acc = f.predict(clf, X, y)
+
+st.write(f"accuracy score:", acc)

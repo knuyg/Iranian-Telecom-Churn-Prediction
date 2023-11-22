@@ -4,6 +4,9 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
 def add_parameter_ui(clf_name):
     """Adds hyperparameters tuning UI, based on the selected classifier
 
@@ -23,7 +26,7 @@ def add_parameter_ui(clf_name):
         K = st.sidebar.slider("K", 1, 15)
         params["K"] = K
     elif clf_name == "SVM":
-        C = st.sidebar.slider("K", 0.01, 10.0)
+        C = st.sidebar.slider("C", 0.01, 10.0)
         params["C"] = C
     elif clf_name == "Decision Tree":
         max_depth = st.sidebar.slider("max_depth", 2, 15)
@@ -46,7 +49,7 @@ def get_classifier(clf_name, params):
     Returns
     -------
     clf
-        a machine learning classifier
+        a machine learning classifier?????????????????????????????
     """
 
     if clf_name == "KNN":
@@ -58,3 +61,30 @@ def get_classifier(clf_name, params):
                                     n_estimators = params["n_estimators"], random_state = 42)
 
     return clf
+
+def predict(clf, X, y):
+    """Creates a prediction of the target
+
+    Parameters
+    ----------
+    clf : object
+        Classifier
+
+    X: ?????????????????????????????
+        ?????????????????????????????
+
+    Y: ?????????????????????????????
+        Dataframe target
+
+    Returns
+    -------
+    clf
+        a machine learning classifier
+    """
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
+    clf.fit(X_train, y_train)
+    y_pred = clf.predict(X_test)
+    acc = accuracy_score(y_test, y_pred)
+
+    return y_pred, acc
