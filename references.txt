@@ -1,3 +1,5 @@
 https://www.youtube.com/watch?v=Klqn--Mu2pE
-api: https://www.youtube.com/watch?v=C82lT9cWQiA&list=PLgNJO2hghbmjY-_2OZbm69f9Ga-eIqFui&index=2
-production ML code from notebook: https://marvelousmlops.substack.com/p/bridging-the-gap-converting-data
+API: https://www.youtube.com/watch?v=C82lT9cWQiA&list=PLgNJO2hghbmjY-_2OZbm69f9Ga-eIqFui&index=2
+Production ML code from Notebook: https://marvelousmlops.substack.com/p/bridging-the-gap-converting-data
+Filters UI in Streamlit: https://blog.streamlit.io/auto-generate-a-dataframe-filtering-ui-in-streamlit-with-filter_dataframe/
+Tools for Explore Data page: https://freedium.cfd/https://medium.com/analytics-vidhya/streamlit-app-for-exploratory-data-analysis-293a6c3f841

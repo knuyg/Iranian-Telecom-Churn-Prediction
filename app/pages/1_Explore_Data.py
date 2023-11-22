@@ -6,7 +6,7 @@ import plotly.figure_factory as ff
 
 @st.cache_data
 def load_data():
-    data = pd.read_csv("./Customer Churn.csv")
+    data = pd.read_csv('./data/customer_churn.csv')
     return data
 
 st.set_page_config(page_title="Customer Churn Data Visualization", page_icon="📈")
@@ -27,15 +27,15 @@ data = st.session_state.data
 
 ## --- Raw Data --- ##
 
-if st.checkbox('Show raw data'):
-    st.subheader('Raw data')
+if st.checkbox("Show raw data"):
+    st.subheader("Raw data")
 
     # User Control for number of rows to display
-    rows_option = st.slider('Select number of rows to display', min_value=5, max_value=50, value=15, step=5)
+    rows_option = st.slider("Select number of rows to display", min_value=5, max_value=50, value=15, step=5)
 
     # Pagination
     page_size = rows_option
-    page_number = st.number_input('Page Number', min_value=1, max_value=(len(data) // page_size) + 1, step=1, value=1)
+    page_number = st.number_input("Page Number", min_value=1, max_value=(len(data) // page_size) + 1, step=1, value=1)
 
     # Calculate the start and end indices of the current page
     start_idx = (page_number - 1) * page_size
@@ -43,14 +43,14 @@ if st.checkbox('Show raw data'):
 
     # Display the shape of the dataset
     __shape__ = data.shape
-    st.write('Dataset contains', __shape__[0],' rows and ', __shape__[1], 'columns.')
+    st.write("Dataset contains", __shape__[0]," rows and ", __shape__[1], "columns.")
 
     # Display the data for the current page
     st.table(data.iloc[start_idx:end_idx])
 
 ## --- Heatmap --- ##
 
-st.subheader('Correlation Heatmap')
+st.subheader("Correlation Heatmap")
 corr_matrix = data.corr()
 fig = ff.create_annotated_heatmap(
     z=corr_matrix.values[::-1],  # Reverse the order of rows for the heatmap
