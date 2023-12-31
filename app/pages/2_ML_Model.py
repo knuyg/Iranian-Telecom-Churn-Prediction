@@ -28,7 +28,11 @@ X = data.drop(columns=['Churn'])
 y = data['Churn']
 y_pred, acc = f.predict(clf, X, y)
 
-st.write(f"Accuracy score:", round(acc, 4))
+st.divider()
+st.write(f"**Model selected**:", classifier_name)
+st.write(f"**Hyperparameters values**:", params)
+st.write(f"**Accuracy score**:", round(acc, 4))
+st.divider()
 
 # keep 2 dimensions so we can plot it
 pca = PCA(2)
