@@ -28,7 +28,7 @@ X = data.drop(columns=['Churn'])
 y = data['Churn']
 y_pred, acc = f.predict(clf, X, y)
 
-st.write(f"Accuracy score:", acc)
+st.write(f"Accuracy score:", round(acc, 4))
 
 # keep 2 dimensions so we can plot it
 pca = PCA(2)
