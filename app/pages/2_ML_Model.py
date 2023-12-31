@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import utils.functions as f
 
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+
 st.set_page_config(page_title="ML Model", page_icon="📈")
 
 st.markdown("# Machine Learning Model Selection")
@@ -25,4 +28,19 @@ X = data.drop(columns=['Churn'])
 y = data['Churn']
 y_pred, acc = f.predict(clf, X, y)
 
-st.write(f"accuracy score:", acc)
+st.write(f"Accuracy score:", acc)
+
+# keep 2 dimensions so we can plot it
+pca = PCA(2)
+X_projected = pca.fit_transform(X)
+
+x1 = X_projected[:, 0]
+x2 = X_projected[:, 1]
+
+fig = plt.figure()
+plt.scatter(x1, x2, c=y, alpha=0.8, cmap='viridis')
+plt.xlabel("Principal Component 1")
+plt.ylabel("Principal Component 2")
+plt.colorbar()
+
+st.pyplot(fig)
