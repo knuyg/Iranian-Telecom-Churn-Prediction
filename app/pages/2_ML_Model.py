@@ -29,22 +29,16 @@ y = data['Churn']
 y_pred, acc = f.predict(clf, X, y)
 
 st.divider()
+
+st.markdown("### Model summary")
 st.write(f"**Model selected**:", classifier_name)
 st.write(f"**Hyperparameters values**:", params)
 st.write(f"**Accuracy score**:", round(acc, 4))
+
 st.divider()
 
-# keep 2 dimensions so we can plot it
-pca = PCA(2)
-X_projected = pca.fit_transform(X)
+st.markdown("### Accuracy plot")
 
-x1 = X_projected[:, 0]
-x2 = X_projected[:, 1]
-
-fig = plt.figure()
-plt.scatter(x1, x2, c=y, alpha=0.8, cmap='viridis')
-plt.xlabel("Principal Component 1")
-plt.ylabel("Principal Component 2")
-plt.colorbar()
-
-st.pyplot(fig)
+selected_hyperparam = st.selectbox('Choose the hyperparameter to evaluate:', params)
+chart_data = f.accuracy_plot(clf, X, y, selected_hyperparam)
+st.line_chart(data=chart_data, x="x", y="y")
