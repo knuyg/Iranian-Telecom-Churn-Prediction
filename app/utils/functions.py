@@ -8,18 +8,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 def add_parameter_ui(clf_name):
-    """Adds hyperparameters tuning UI, based on the selected classifier
-
-    Parameters
-    ----------
-    clf_name : str
-        Name of the classifier chosen
-
-    Returns
-    -------
-    params
-        a dictionnary of the selected hyperparameters values
-    """
 
     params = dict()
     if clf_name == "KNN":
@@ -36,21 +24,6 @@ def add_parameter_ui(clf_name):
     return params
 
 def get_classifier(clf_name, params):
-    """Creates a classifier based upon the selected model and hyperparameters
-
-    Parameters
-    ----------
-    clf_name : str
-        Name of the classifier chosen
-
-    params: dict
-        Classifier hyperparameters
-
-    Returns
-    -------
-    clf
-        a machine learning classifier?????????????????????????????
-    """
 
     if clf_name == "KNN":
         clf = KNeighborsClassifier(n_neighbors = params["K"])
@@ -63,24 +36,6 @@ def get_classifier(clf_name, params):
     return clf
 
 def predict(clf, X, y):
-    """Creates a prediction of the target
-
-    Parameters
-    ----------
-    clf : object
-        Classifier
-
-    X: ?????????????????????????????
-        ?????????????????????????????
-
-    Y: ?????????????????????????????
-        Dataframe target
-
-    Returns
-    -------
-    clf
-        a machine learning classifier
-    """
 
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state = 42)
     clf.fit(X_train, y_train)
