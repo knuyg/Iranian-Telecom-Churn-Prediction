@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
@@ -43,3 +45,14 @@ def predict(clf, X, y):
     acc = accuracy_score(y_test, y_pred)
 
     return y_pred, acc
+
+def accuracy_plot(clf, X, y, selected_hyperparam):
+
+    parameter_range = [i for i in range(1, 15)]
+    accuracy_list = []
+    
+    for i in parameter_range:
+        accuracy_list.append(predict(clf, X, y)[1])
+
+    chart_data = pd.DataFrame({'x':parameter_range, 'y':accuracy_list})
+    return chart_data
